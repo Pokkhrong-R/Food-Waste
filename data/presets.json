@@ -1,0 +1,327 @@
+{
+  "categories": [
+    {
+      "id": "meat",
+      "name": "เนื้อสัตว์ (Meat & Poultry)",
+      "icon": "🥩",
+      "defaultShelfLifeDays": 3,
+      "storageType": "chilled"
+    },
+    {
+      "id": "seafood",
+      "name": "อาหารทะเล (Seafood)",
+      "icon": "🦐",
+      "defaultShelfLifeDays": 2,
+      "storageType": "chilled"
+    },
+    {
+      "id": "vegetable",
+      "name": "ผักสด (Vegetables)",
+      "icon": "🥬",
+      "defaultShelfLifeDays": 4,
+      "storageType": "chilled"
+    },
+    {
+      "id": "fruit",
+      "name": "ผลไม้ (Fruits)",
+      "icon": "🍎",
+      "defaultShelfLifeDays": 5,
+      "storageType": "chilled"
+    },
+    {
+      "id": "dairy_egg",
+      "name": "นม ไข่ & ของสด (Dairy & Eggs)",
+      "icon": "🥚",
+      "defaultShelfLifeDays": 7,
+      "storageType": "chilled"
+    },
+    {
+      "id": "seasoning_pantry",
+      "name": "เครื่องปรุง & อาหารแห้ง (Pantry)",
+      "icon": "🥫",
+      "defaultShelfLifeDays": 30,
+      "storageType": "room"
+    }
+  ],
+  "presets": [
+    {
+      "id": "preset_meat_01",
+      "name": "หมูสับ",
+      "categoryId": "meat",
+      "defaultUnit": "แพ็ค",
+      "defaultShelfLifeDays": 3,
+      "storageType": "chilled",
+      "icon": "🥩"
+    },
+    {
+      "id": "preset_meat_02",
+      "name": "อกไก่สด",
+      "categoryId": "meat",
+      "defaultUnit": "แพ็ค",
+      "defaultShelfLifeDays": 3,
+      "storageType": "chilled",
+      "icon": "🍗"
+    },
+    {
+      "id": "preset_meat_03",
+      "name": "เนื้อหมูสันนอก",
+      "categoryId": "meat",
+      "defaultUnit": "แพ็ค",
+      "defaultShelfLifeDays": 3,
+      "storageType": "chilled",
+      "icon": "🥩"
+    },
+    {
+      "id": "preset_meat_04",
+      "name": "เบคอน",
+      "categoryId": "meat",
+      "defaultUnit": "ห่อ",
+      "defaultShelfLifeDays": 7,
+      "storageType": "chilled",
+      "icon": "🥓"
+    },
+    {
+      "id": "preset_meat_05",
+      "name": "เนื้อวัวบด",
+      "categoryId": "meat",
+      "defaultUnit": "แพ็ค",
+      "defaultShelfLifeDays": 2,
+      "storageType": "chilled",
+      "icon": "🥩"
+    },
+    {
+      "id": "preset_seafood_01",
+      "name": "กุ้งสด",
+      "categoryId": "seafood",
+      "defaultUnit": "จาน",
+      "defaultShelfLifeDays": 2,
+      "storageType": "chilled",
+      "icon": "🦐"
+    },
+    {
+      "id": "preset_seafood_02",
+      "name": "ปลากะพงแล่",
+      "categoryId": "seafood",
+      "defaultUnit": "ตัว",
+      "defaultShelfLifeDays": 2,
+      "storageType": "chilled",
+      "icon": "🐟"
+    },
+    {
+      "id": "preset_seafood_03",
+      "name": "หมึกสด",
+      "categoryId": "seafood",
+      "defaultUnit": "จาน",
+      "defaultShelfLifeDays": 2,
+      "storageType": "chilled",
+      "icon": "🦑"
+    },
+    {
+      "id": "preset_veg_01",
+      "name": "ผักกาดขาว",
+      "categoryId": "vegetable",
+      "defaultUnit": "หัว",
+      "defaultShelfLifeDays": 5,
+      "storageType": "chilled",
+      "icon": "🥬"
+    },
+    {
+      "id": "preset_veg_02",
+      "name": "ผักบุ้งจีน",
+      "categoryId": "vegetable",
+      "defaultUnit": "กำ",
+      "defaultShelfLifeDays": 3,
+      "storageType": "chilled",
+      "icon": "🌱"
+    },
+    {
+      "id": "preset_veg_03",
+      "name": "แครอท",
+      "categoryId": "vegetable",
+      "defaultUnit": "หัว",
+      "defaultShelfLifeDays": 10,
+      "storageType": "chilled",
+      "icon": "🥕"
+    },
+    {
+      "id": "preset_veg_04",
+      "name": "มักกะโรนี/มะเขือเทศ",
+      "categoryId": "vegetable",
+      "defaultUnit": "ลูก",
+      "defaultShelfLifeDays": 5,
+      "storageType": "chilled",
+      "icon": "🍅"
+    },
+    {
+      "id": "preset_veg_05",
+      "name": "กระเทียม",
+      "categoryId": "vegetable",
+      "defaultUnit": "หัว",
+      "defaultShelfLifeDays": 20,
+      "storageType": "room",
+      "icon": "🧄"
+    },
+    {
+      "id": "preset_veg_06",
+      "name": "หอมหัวใหญ่",
+      "categoryId": "vegetable",
+      "defaultUnit": "หัว",
+      "defaultShelfLifeDays": 14,
+      "storageType": "room",
+      "icon": "🧅"
+    },
+    {
+      "id": "preset_veg_07",
+      "name": "เห็ดเข็มทอง",
+      "categoryId": "vegetable",
+      "defaultUnit": "ห่อ",
+      "defaultShelfLifeDays": 4,
+      "storageType": "chilled",
+      "icon": "🍄"
+    },
+    {
+      "id": "preset_veg_08",
+      "name": "มะนาว",
+      "categoryId": "vegetable",
+      "defaultUnit": "ลูก",
+      "defaultShelfLifeDays": 10,
+      "storageType": "chilled",
+      "icon": "🍋"
+    },
+    {
+      "id": "preset_fruit_01",
+      "name": "กล้วยหอม",
+      "categoryId": "fruit",
+      "defaultUnit": "หวี",
+      "defaultShelfLifeDays": 4,
+      "storageType": "room",
+      "icon": "🍌"
+    },
+    {
+      "id": "preset_fruit_02",
+      "name": "แอปเปิ้ล",
+      "categoryId": "fruit",
+      "defaultUnit": "ลูก",
+      "defaultShelfLifeDays": 14,
+      "storageType": "chilled",
+      "icon": "🍎"
+    },
+    {
+      "id": "preset_fruit_03",
+      "name": "แตงโม",
+      "categoryId": "fruit",
+      "defaultUnit": "ชิ้น",
+      "defaultShelfLifeDays": 3,
+      "storageType": "chilled",
+      "icon": "🍉"
+    },
+    {
+      "id": "preset_fruit_04",
+      "name": "ส้ม",
+      "categoryId": "fruit",
+      "defaultUnit": "ลูก",
+      "defaultShelfLifeDays": 7,
+      "storageType": "chilled",
+      "icon": "🍊"
+    },
+    {
+      "id": "preset_dairy_01",
+      "name": "ไข่ไก่",
+      "categoryId": "dairy_egg",
+      "defaultUnit": "ฟอง",
+      "defaultShelfLifeDays": 14,
+      "storageType": "chilled",
+      "icon": "🥚"
+    },
+    {
+      "id": "preset_dairy_02",
+      "name": "นมสดพาสเจอร์ไรส์",
+      "categoryId": "dairy_egg",
+      "defaultUnit": "ขวด",
+      "defaultShelfLifeDays": 7,
+      "storageType": "chilled",
+      "icon": "🥛"
+    },
+    {
+      "id": "preset_dairy_03",
+      "name": "เนยสด",
+      "categoryId": "dairy_egg",
+      "defaultUnit": "ก้อน",
+      "defaultShelfLifeDays": 30,
+      "storageType": "chilled",
+      "icon": "🧈"
+    },
+    {
+      "id": "preset_dairy_04",
+      "name": "ชีสแผ่น",
+      "categoryId": "dairy_egg",
+      "defaultUnit": "ห่อ",
+      "defaultShelfLifeDays": 20,
+      "storageType": "chilled",
+      "icon": "🧀"
+    },
+    {
+      "id": "preset_dairy_05",
+      "name": "โยเกิร์ต",
+      "categoryId": "dairy_egg",
+      "defaultUnit": "ถ้วย",
+      "defaultShelfLifeDays": 10,
+      "storageType": "chilled",
+      "icon": "🥣"
+    },
+    {
+      "id": "preset_pantry_01",
+      "name": "น้ำปลา",
+      "categoryId": "seasoning_pantry",
+      "defaultUnit": "ขวด",
+      "defaultShelfLifeDays": 180,
+      "storageType": "room",
+      "icon": "🧴"
+    },
+    {
+      "id": "preset_pantry_02",
+      "name": "ซอสหอยนางรม",
+      "categoryId": "seasoning_pantry",
+      "defaultUnit": "ขวด",
+      "defaultShelfLifeDays": 90,
+      "storageType": "chilled",
+      "icon": "🍾"
+    },
+    {
+      "id": "preset_pantry_03",
+      "name": "ซีอิ๊วขาว",
+      "categoryId": "seasoning_pantry",
+      "defaultUnit": "ขวด",
+      "defaultShelfLifeDays": 180,
+      "storageType": "room",
+      "icon": "🧴"
+    },
+    {
+      "id": "preset_pantry_04",
+      "name": "น้ำมันพืช",
+      "categoryId": "seasoning_pantry",
+      "defaultUnit": "ขวด",
+      "defaultShelfLifeDays": 180,
+      "storageType": "room",
+      "icon": "🏺"
+    },
+    {
+      "id": "preset_pantry_05",
+      "name": "ขนมปังแผ่น",
+      "categoryId": "seasoning_pantry",
+      "defaultUnit": "แถว",
+      "defaultShelfLifeDays": 5,
+      "storageType": "room",
+      "icon": "🍞"
+    },
+    {
+      "id": "preset_pantry_06",
+      "name": "บะหมี่กึ่งสำเร็จรูป",
+      "categoryId": "seasoning_pantry",
+      "defaultUnit": "ซอง",
+      "defaultShelfLifeDays": 90,
+      "storageType": "room",
+      "icon": "🍜"
+    }
+  ]
+}

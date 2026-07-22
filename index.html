@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshSaver — ระบบจัดการวัตถุดิบ & เคลียร์ตู้เย็นลด Food Waste</title>
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+      <a href="#" class="brand" onclick="UI.showView('view-fridge'); return false;">
+        <span class="brand-icon">🧊</span>
+        <span class="brand-title">FreshSaver</span>
+      </a>
+
+      <nav class="nav-links">
+        <button class="nav-btn active" data-view="view-fridge">
+          🏠 Fridge (ตู้เย็น)
+        </button>
+        <button class="nav-btn" data-view="view-add">
+          ➕ Add Item (เพิ่มวัตถุดิบ)
+        </button>
+        <button class="nav-btn" data-view="view-settings">
+          ⚙️ Settings (ตั้งค่า)
+        </button>
+        <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Dark/Light Mode">
+          🌙
+        </button>
+      </nav>
+    </header>
+
+    <!-- Daily Expiry Alert Banner Container -->
+    <div id="expiry-banner-container"></div>
+
+    <!-- ====================================================================
+         VIEW 1: Fridge Inventory (หน้าตู้เย็นหลัก)
+         ==================================================================== -->
+    <main id="view-fridge" class="view-panel">
+      <!-- Summary Bar Cards -->
+      <section id="summary-bar-container" class="summary-bar"></section>
+
+      <!-- Controls & Filter Bar -->
+      <section class="controls-bar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="fridge-search" placeholder="Search ingredient name... (ค้นชื่อวัตถุดิบ)">
+        </div>
+
+        <div class="filter-group">
+          <button class="filter-btn active" data-status="active">In Fridge (ในตู้เย็น)</button>
+          <button class="filter-btn" data-status="consumed">Consumed (กินแล้ว)</button>
+          <button class="filter-btn" data-status="wasted">Wasted (ทิ้ง)</button>
+          <button class="filter-btn" data-status="all">All (ทั้งหมด)</button>
+        </div>
+      </section>
+
+      <!-- Inventory Items Grid -->
+      <section id="fridge-items-grid" class="fridge-grid"></section>
+    </main>
+
+    <!-- ====================================================================
+         VIEW 2: Add Item View (One-Tap Presets + Custom Add Form)
+         ==================================================================== -->
+    <section id="view-add" class="view-panel" style="display: none;">
+      <!-- Section A: One-Tap Quick Presets -->
+      <div class="view-card">
+        <h2 class="view-title">⚡ One-Tap Quick Add (เลือกจากวัตถุดิบยอดฮิต)</h2>
+        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
+          กดเลือกวัตถุดิบที่คุณเพิ่งซื้อมา ระบบจะคำนวณวันหมดอายุมาตรฐานและบันทึกเข้าตู้เย็นให้ทันทีใน 1 วินาที!
+        </p>
+        
+        <!-- Category Filter Tabs for Presets -->
+        <div id="preset-category-tabs" class="preset-category-tabs"></div>
+
+        <!-- Presets Grid -->
+        <div id="preset-grid-container" class="preset-grid"></div>
+      </div>
+
+      <!-- Section B: Custom Form Add -->
+      <div class="view-card">
+        <h2 class="view-title">📝 Custom Add Form (เพิ่มวัตถุดิบอื่นๆ)</h2>
+        <form id="custom-add-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="custom-name">Ingredient Name (ชื่อวัตถุดิบ) *</label>
+              <input type="text" id="custom-name" class="form-control" placeholder="เช่น ผักบุ้งจีน, เห็ดแครง" required>
+            </div>
+
+            <div class="form-group">
+              <label for="custom-category">Category (หมวดหมู่) *</label>
+              <select id="custom-category" class="form-control" required></select>
+            </div>
+
+            <div class="form-group">
+              <label for="custom-quantity">Quantity (จำนวน)</label>
+              <input type="number" id="custom-quantity" class="form-control" value="1" min="0.1" step="0.1">
+            </div>
+
+            <div class="form-group">
+              <label for="custom-unit">Unit (หน่วยนับ)</label>
+              <input type="text" id="custom-unit" class="form-control" value="ชิ้น" placeholder="เช่น ถุง, แพ็ค, หัว, กก.">
+            </div>
+
+            <div class="form-group">
+              <label for="custom-purchase-date">Purchase Date (วันที่ซื้อ)</label>
+              <input type="date" id="custom-purchase-date" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="custom-expiry-date">Expiry Date (วันหมดอายุ) *</label>
+              <input type="date" id="custom-expiry-date" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label for="custom-storage">Storage Location (สถานที่เก็บ)</label>
+              <select id="custom-storage" class="form-control">
+                <option value="chilled">Chilled (ช่องแช่เย็น)</option>
+                <option value="frozen">Frozen (ช่องแช่แข็ง)</option>
+                <option value="room">Room Temp (อุณหภูมิห้อง)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="UI.showView('view-fridge')">Cancel (ยกเลิก)</button>
+            <button type="submit" class="btn-primary">💾 Save to Fridge (บันทึกเข้าตู้เย็น)</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 3: Edit Item View (หน้าแก้ไขวัตถุดิบ)
+         ==================================================================== -->
+    <section id="view-edit" class="view-panel" style="display: none;">
+      <div class="view-card">
+        <h2 class="view-title">✏️ Edit Ingredient (แก้ไขข้อมูลวัตถุดิบ)</h2>
+        <form id="edit-item-form">
+          <input type="hidden" id="edit-item-id">
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="edit-name">Ingredient Name (ชื่อวัตถุดิบ) *</label>
+              <input type="text" id="edit-name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-category">Category (หมวดหมู่) *</label>
+              <select id="edit-category" class="form-control" required></select>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-quantity">Quantity (จำนวน)</label>
+              <input type="number" id="edit-quantity" class="form-control" min="0.1" step="0.1">
+            </div>
+
+            <div class="form-group">
+              <label for="edit-unit">Unit (หน่วยนับ)</label>
+              <input type="text" id="edit-unit" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="edit-purchase-date">Purchase Date (วันที่ซื้อ)</label>
+              <input type="date" id="edit-purchase-date" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="edit-expiry-date">Expiry Date (วันหมดอายุ) *</label>
+              <input type="date" id="edit-expiry-date" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-storage">Storage Location (สถานที่เก็บ)</label>
+              <select id="edit-storage" class="form-control">
+                <option value="chilled">Chilled (ช่องแช่เย็น)</option>
+                <option value="frozen">Frozen (ช่องแช่แข็ง)</option>
+                <option value="room">Room Temp (อุณหภูมิห้อง)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="UI.showView('view-fridge')">Cancel (ยกเลิก)</button>
+            <button type="submit" class="btn-primary">💾 Save Changes (บันทึกการแก้ไข)</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 4: Settings View (หน้าตั้งค่าระบบ)
+         ==================================================================== -->
+    <section id="view-settings" class="view-panel" style="display: none;">
+      <div class="view-card">
+        <h2 class="view-title">⚙️ App Settings (ตั้งค่าแอปพลิเคชัน)</h2>
+        <form id="settings-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="setting-theme">Color Theme (ธีมการแสดงผล)</label>
+              <select id="setting-theme" class="form-control" onchange="App.toggleTheme()">
+                <option value="dark">🌙 Dark Mode</option>
+                <option value="light">☀️ Light Mode</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="setting-notif-time">Notification Time (เวลาสรุปแจ้งเตือนประจำวัน)</label>
+              <input type="time" id="setting-notif-time" class="form-control" value="17:00">
+            </div>
+          </div>
+
+          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+            <h3 style="font-size: 16px; font-weight: 700; color: var(--status-danger); margin-bottom: 8px;">
+              🗑️ Clear All Local Data (ล้างข้อมูลทั้งหมด)
+            </h3>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">
+              ลบข้อมูลวัตถุดิบและค่าตั้งทั้งหมดใน localStorage เพื่อเริ่มต้นทดสอบใหม่
+            </p>
+            <button type="button" class="btn-action btn-waste" style="max-width: 200px;" onclick="UI.showConfirmModal('Clear All Data', 'คุณต้องการล้างข้อมูลตู้เย็นทั้งหมดใน localStorage ใช่หรือไม่?', () => { Storage.clearAll(); location.reload(); })">
+              ⚠️ Clear Storage & Reset
+            </button>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">💾 Save Settings</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Toast Notification Area -->
+  <div id="toast-container"></div>
+
+  <!-- Confirmation Modal Dialog -->
+  <div id="confirm-modal" class="modal-backdrop">
+    <div class="modal-box">
+      <h3 id="modal-title" style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Confirm Action</h3>
+      <p id="modal-message" style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;"></p>
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button class="btn-secondary" onclick="UI.closeConfirmModal()">Cancel</button>
+        <button id="modal-confirm-btn" class="btn-primary" style="background-color: var(--status-danger);">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/expiry.js"></script>
+  <script src="js/presets.js"></script>
+  <script src="js/inventory.js"></script>
+  <script src="js/notification.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
